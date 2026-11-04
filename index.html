@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operação GPS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="game">
+
+<!-- BOTÃO DE ÁUDIO DISCRETO -->
+<div class="audio-container">
+    <button class="audio-trigger" id="audioTriggerBtn" onclick="toggleAudioMenu()" title="Configurações de Áudio">🔊</button>
+    <div class="audio-popup" id="audioPopup">
+        <button class="audio-btn-mute" id="audioToggleBtn" onclick="toggleAudio()">Mutar Som</button>
+        <label for="volumeSlider">Volume</label>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.3" oninput="changeVolume(this.value)">
+    </div>
+</div>
+
+<div class="map"></div>
+<div class="light"></div>
+
+<!-- TELA INICIAL -->
+
+<section class="screen" id="home">
+    <div class="logo">SOMBRAS & PISTAS-INVESTIGAÇÃO ESPECIAL</div>
+    <h1 class="title">OPERAÇÃO<br>GPS 📍</h1>
+    <div class="subtitle">O Mistério da Localização</div>
+    <p class="description">
+        Um professor desapareceu misteriosamente...
+        Você está preparado para investigar,
+        encontrar as pistas e solucionar esse mistério?
+    </p>
+    <button class="play" onclick="initAudioAndStart()">▶ PLAY</button>
+</section>
+
+<!-- TELA DE HISTÓRIA -->
+
+<section class="screen" id="story">
+    <div class="story-box">
+        <div class="professor-avatar-large">
+            <img src="https://pic.pngsucai.com/00/65/66/d745e7bbbcf0c0cd.webp" alt="Professor Rafael">
+        </div>
+        <div class="story-content">
+            <h2>O Desaparecimento do Professor Rafael</h2>
+            <p>
+                Era dia de aula do <strong>Professor Rafael</strong>. Os alunos entraram na sala, sentaram-se em seus lugares e ficaram aguardando o professor começar a explicação. O tempo passou, os minutos viraram horas de espera... e nada dele aparecer.
+            </p>
+            <p>
+                Quando foram investigar, descobriram que ninguém via o professor desde ontem!
+            </p>
+            <p>
+                Deixaram enigmas e coordenadas na lousa. Os detetives precisam agir!
+            </p>
+            <div class="story-buttons">
+                <button class="continue" onclick="playClickSound(); showCharacters()">ESCOLHER DETETIVE →</button>
+                <button class="back" onclick="playClickSound(); changeScreen('home')">← VOLTAR</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TELA DE PERSONAGENS -->
+
+<section class="screen" id="characters">
+    <h2 class="heading">🔎 ESCOLHA SEU DETETIVE</h2>
+    <p class="instructions">Escolha seu personagem e prepare-se para a missão!</p>
+
+    <div class="character-list">
+        <div class="character" onclick="selectCharacter(0)" id="character0">
+            <div class="avatar">
+                <img src="https://thumbs.dreamstime.com/b/dark-noir-portrait-female-detective-holding-retro-telephone-receiver-private-detective-spy-investigation-dark-noir-portrait-311350908.jpg" alt="Dra. Velocidade">
+            </div>
+            <h3>Dra. Velocidade</h3>
+            <p>Especialista em movimentos, velocidade e aceleração.</p>
+            <span class="subject"> CINEMÁTICA</span>
+            <span class="select-label">SELECIONAR</span>
+        </div>
+
+        <div class="character" onclick="selectCharacter(1)" id="character1">
+            <div class="avatar">
+                <img src="https://img.freepik.com/premium-photo/man-wearing-hat-magnifying-glass-looking-into-magnifying-glass_1057087-4633.jpg?w=2000" alt="Professor Newton">
+            </div>
+            <h3>Professor Newton</h3>
+            <p>Especialista em forças, movimento e equilíbrio.</p>
+            <span class="subject"> LEIS DE NEWTON</span>
+            <span class="select-label">SELECIONAR</span>
+        </div>
+
+        <div class="character" onclick="selectCharacter(2)" id="character2">
+            <div class="avatar">
+                <img src="https://pbs.twimg.com/media/GjLOsIiX0AAFI40.jpg" alt="Agente Energia">
+            </div>
+            <h3>Agente Energia</h3>
+            <p>Especialista em trabalho, energia cinética e potencial.</p>
+            <span class="subject"> ENERGIA</span>
+            <span class="select-label">SELECIONAR</span>
+        </div>
+    </div>
+
+    <button class="continue" id="continueButton" onclick="playClickSound(); continueMission()" disabled>CONTINUAR →</button>
+</section>
+
+<!-- TELA DA MISSÃO -->
+
+<section class="screen" id="mission">
+    <div class="mission-box">
+        <div class="mission-avatar" id="missionAvatar"></div>
+        <h2 id="missionName">Dra. Velocidade</h2>
+        <p id="missionSubject"></p>
+        <br>
+        <p id="missionDescription"></p>
+        <button class="puzzle-btn" onclick="playClickSound(); startPuzzle()">INICIAR INVESTIGAÇÃO 🔍</button>
+        <br>
+        <button class="back" onclick="playClickSound(); showCharacters()">← TROCAR PERSONAGEM</button>
+    </div>
+</section>
+
+<!-- TELA DO ENIGMA / FASE 1 -->
+
+<section class="screen" id="puzzleScreen">
+    <div class="puzzle-box">
+        <h2> PISTA 1: O BILHETE CIFRADO NA SALA</h2>
+        <p style="color: #a9c8f9;">Ao inspecionar a mesa trancada do Professor Rafael, você encontra um papel amassado:</p>
+
+        <div class="clue-paper" id="clueText"></div>
+
+        <p style="font-weight: bold; color: #53baff;" id="puzzleQuestion"></p>
+
+        <div class="options-list" id="puzzleOptions"></div>
+
+        <div id="puzzleFeedback" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</section>
+
+<!-- TELA DO MAPA REAL / FASE 2 -->
+
+<section class="screen" id="mapScreen">
+    <div class="map-screen-box">
+        <h2>🛰 SISTEMA DE RASTREIO GPS DA ESCOLA</h2>
+        
+        <div class="radar-header">
+            <span>📡 STATUS: RASTREADOR DE SATÉLITE</span>
+            <span style="color: #42ff78;" id="radarStatusText">LOCALIZANDO...</span>
+        </div>
+
+        <div class="map-container">
+            <img src="https://preview.redd.it/tactical-3d-map-and-radar-simulation-v0-yxe8iyxddtth1.jpg?width=3819&format=pjpg&auto=webp&s=cc3735e347976a45bcbe1be2d1e91e42474b0a0a" alt="Mapa da Escola">
+            
+            <div class="gps-pin" id="gpsPin">📍 Biblioteca</div>
+        </div>
+
+        <div id="mapSuccessMessage" style="font-weight: bold; font-size: 14px; color: #42ff78; display: none;">
+            🎯 SINAL CAPTURADO! O satélite indicou o primeiro destino na Biblioteca.
+            <br><br>
+            <button class="puzzle-btn" style="font-size: 15px; padding: 10px 25px;" onclick="playClickSound(); startPhase3()">IR PARA A BIBLIOTECA 🏃‍♂️</button>
+        </div>
+    </div>
+</section>
+
+<!-- FASE 3: A PISTA NA BIBLIOTECA E O PÉ DO JAMBO -->
+
+<section class="screen" id="phase3Screen">
+    <div class="puzzle-box">
+        <h2> FASE 3: A BIBLIOTECA E A ESCRITA NO CHÃO</h2>
+        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80" alt="Biblioteca" class="phase-img">
+        <p style="color: #a9c8f9;">Ao chegar correndo na Biblioteca, o professor já não estava lá! Mas perto da janela com vista para o <strong>pé do jambo</strong>, há uma mensagem escrita com giz no chão:</p>
+
+        <div class="clue-paper" id="phase3Clue">
+            💬 "A gravidade puxa a fruta do pé de jambo a 10 m/s². Se um jambo cai do topo e leva 1 segundo para tocar o chão, a estante secreta de física tiene o valor exato da distância percorrida!" (Fórmula: d = 5 * t²)
+        </div>
+
+        <p style="font-weight: bold; color: #53baff;">Qual é o número da estante secreta onde está a próxima pista?</p>
+
+        <div class="options-list">
+            <button class="option-btn" onclick="checkPhase3(false)"> Estante 2</button>
+            <button class="option-btn" onclick="checkPhase3(true)"> Estante 5 (5 metros de queda)</button>
+            <button class="option-btn" onclick="checkPhase3(false)"> Estante 10</button>
+        </div>
+
+        <div id="phase3Feedback" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</section>
+
+<!-- FASE 4: O NOTEBOOK PERTO DO PÉ DO JAMBO -->
+
+<section class="screen" id="phase4Screen">
+    <div class="puzzle-box">
+        <h2> FASE 4: A ESCRITA AO REDOR DO PÉ DO JAMBO</h2>
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80" alt="Pé do Jambo e Pátio" class="phase-img">
+        <p style="color: #a9c8f9;">Atrás da Estante 5 você encontrou um pendrive! Na base do <strong>jambo</strong>, há mais anotações riscadas no chão e um notebook ligado:</p>
+
+        <div class="clue-paper" id="phase4Clue">
+             "SISTEMA BLOQUEADO: Deslocamento Vetorial registrado no chão. O trajeto foi de 3 metros para o Norte e 4 metros para o Leste até a sombra do tronco. Qual o vetor de deslocamento em linha reta?"
+        </div>
+
+        <p style="font-weight: bold; color: #53baff;">Insira o código de desbloqueio do computador:</p>
+
+        <div class="options-list">
+            <button class="option-btn" onclick="checkPhase4(false)"> Código 7 metros</button>
+            <button class="option-btn" onclick="checkPhase4(true)"> Código 5 metros (Teorema de Pitágoras)</button>
+            <button class="option-btn" onclick="checkPhase4(false)"> Código 12 metros</button>
+        </div>
+
+        <div id="phase4Feedback" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</section>
+
+<!-- FASE 5: O CADEADO DO PÉ DO JAMBO -->
+
+<section class="screen" id="phase5Screen">
+    <div class="puzzle-box">
+        <h2> FASE 5: O BAÚ TRANCADO NA RAIZ DA ÁRVORE</h2>
+        <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80" alt="Árvore e Raízes" class="phase-img">
+        <p style="color: #a9c8f9;">O arquivo do computador liberou a localização exata: há um baú de metal escondido nas raízes do <strong>jambo</strong>, trancado com um cadeado de segredo numérico de 3 dígitos!</p>
+
+        <div class="clue-paper" id="phase5Clue">
+             "A combinação secreta é formada por: 1) A aceleração da gravidade aproximada (10); 2) O tempo de queda do jambo (1); 3) A força resultante do movimento circular no galho (4)." -> (Senha: 1, 1, 4)
+        </div>
+
+        <p style="font-weight: bold; color: #53baff;">Qual é a combinação numérica correta para abrir o baú?</p>
+
+        <div class="options-list">
+            <button class="option-btn" onclick="checkPhase5(false)"> Combinação: 3-2-1</button>
+            <button class="option-btn" onclick="checkPhase5(true)"> Combinação: 10-1-4</button>
+            <button class="option-btn" onclick="checkPhase5(false)"> Combinação: 9-8-1</button>
+        </div>
+
+        <div id="phase5Feedback" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</section>
+
+<!-- FASE 6 (FINAL): O RESGATE DO PROFESSOR RAFAEL -->
+
+<section class="screen" id="phase6Screen">
+    <div class="puzzle-box">
+        <h2> FASE 6: O RESGATE DO PROFESSOR RAFAEL!</h2>
+        <p style="color: #d3e2f8; margin-top: 10px;">
+            Ao abrir o baú nas raízes do <strong>jambo</strong>, vocês encontram a chave reserva e um rádio comunicador!
+        </p>
+        <p style="color: #42ff78; margin-top: 15px; font-weight: bold; font-size: 15px; line-height: 1.6;">
+             O Professor Rafael estava trancado sem querer no <strong>Almoxarifado da escola</strong> (bem ao lado da árvore), após ir buscar ferramentas de medição e acabar emperrando a tranca da porta por fora! Missão cumprida com sucesso!
+        </p>
+
+        <br>
+        <button class="puzzle-btn" onclick="playClickSound(); restartGame()">JOGAR NOVAMENTE 🔄</button>
+    </div>
+</section>
+
+<div class="footer">
+    OPERAÇÃO GPS • O MISTÉRIO DA LOCALIZAÇÃO
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
