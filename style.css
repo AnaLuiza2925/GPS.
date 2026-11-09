@@ -4,27 +4,18 @@
     box-sizing: border-box;
 }
 
-html {
-    min-height: 100%;
-}
-
 body {
     font-family: Arial, sans-serif;
     background: #080e20;
     color: white;
-    min-height: 100%;
-    overflow-x: hidden;
 }
 
 .game {
     min-height: 100vh;
-    min-height: 100svh;
     position: relative;
-    height: auto;
-    overflow: visible;
-    overflow-x: clip;
+    overflow: hidden;
     background:
-        radial-gradient(circle at 50% 45%, #293b68, #101a36 50%, #060a17);
+    radial-gradient(circle at 50% 45%, #293b68, #101a36 50%, #060a17);
 }
 
 /* EFEITO DE CÂMERA DE SEGURANÇA */
@@ -32,13 +23,8 @@ body {
     content: " ";
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background:
-        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
     z-index: 10;
     background-size: 100% 3px, 3px 100%;
     pointer-events: none;
@@ -50,8 +36,8 @@ body {
     opacity: .15;
     transform: rotate(-15deg);
     background-image:
-        linear-gradient(90deg, #72aaff 1px, transparent 1px),
-        linear-gradient(#72aaff 1px, transparent 1px);
+     linear-gradient(90deg,#72aaff 1px,transparent 1px),
+     linear-gradient(#72aaff 1px,transparent 1px);
     background-size: 65px 65px;
 }
 
@@ -70,16 +56,12 @@ body {
     position: relative;
     z-index: 15;
     min-height: 100vh;
-    min-height: 100svh;
-    height: auto;
-    width: 100%;
     display: none;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 25px 18px;
     text-align: center;
-    box-sizing: border-box;
 }
 
 #home {
@@ -124,10 +106,8 @@ button {
     font-weight: bold;
 }
 
-.play,
-.continue,
-.puzzle-btn {
-    background: linear-gradient(#168fff, #064caa);
+.play, .continue, .puzzle-btn {
+    background: linear-gradient(#168fff,#064caa);
     border: 2px solid #8bd7ff;
     border-radius: 10px;
     padding: 14px 48px;
@@ -136,15 +116,12 @@ button {
     transition: 0.3s;
 }
 
-.play:hover,
-.continue:hover,
-.puzzle-btn:hover {
+.play:hover, .continue:hover, .puzzle-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 30px #42b8ff;
 }
 
-/* PAINEL DE ÁUDIO */
-
+/* PAINEL DE CONTROLE DE ÁUDIO */
 .audio-container {
     position: fixed;
     top: 15px;
@@ -222,17 +199,11 @@ button {
     color: white;
 }
 
-/* TELA DO DESAPARECIMENTO DO PROFESSOR RAFAEL */
-
-#story {
-    align-items: center;
-}
+/* TELA DO SUMIÇO DO PROFESSOR RAFAEL */
 
 .story-box {
-    box-sizing: border-box;
     max-width: 750px;
     width: 100%;
-    min-width: 0;
     background: #152644;
     border: 1px solid #3c8dcb;
     border-radius: 15px;
@@ -264,16 +235,12 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 0;
-    width: 100%;
-    overflow-wrap: anywhere;
 }
 
 .story-box h2 {
     color: #53baff;
     margin-bottom: 15px;
     font-size: 22px;
-    overflow-wrap: anywhere;
 }
 
 .story-box p {
@@ -281,7 +248,6 @@ button {
     line-height: 1.6;
     font-size: 13.5px;
     margin-bottom: 12px;
-    overflow-wrap: anywhere;
 }
 
 .story-buttons {
@@ -304,7 +270,6 @@ button {
 
 #characters {
     justify-content: center;
-    width: 100%;
 }
 
 .heading {
@@ -321,23 +286,19 @@ button {
 
 .character-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     width: 100%;
     max-width: 850px;
-    min-width: 0;
-    box-sizing: border-box;
 }
 
 .character {
-    background: linear-gradient(145deg, #293753, #111b32);
+    background: linear-gradient(145deg,#293753,#111b32);
     border: 2px solid #475a7d;
     border-radius: 14px;
     padding: 20px 10px;
     transition: .25s;
     cursor: pointer;
-    min-width: 0;
-    overflow-wrap: anywhere;
 }
 
 .character:hover {
@@ -347,7 +308,7 @@ button {
 
 .character.selected {
     border: 3px solid #32baff;
-    background: linear-gradient(145deg, #244b78, #12233f);
+    background: linear-gradient(145deg,#244b78,#12233f);
     box-shadow: 0 0 22px #168fff80;
 }
 
@@ -365,7 +326,6 @@ button {
 }
 
 .avatar img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -375,7 +335,6 @@ button {
     font-size: 17px;
     color: #73c9ff;
     margin-bottom: 10px;
-    overflow-wrap: anywhere;
 }
 
 .character p {
@@ -383,7 +342,6 @@ button {
     font-size: 12px;
     line-height: 1.5;
     min-height: 55px;
-    overflow-wrap: anywhere;
 }
 
 .subject {
@@ -395,7 +353,6 @@ button {
     margin-top: 12px;
     font-size: 11px;
     color: #a9ddff;
-    overflow-wrap: anywhere;
 }
 
 .select-label {
@@ -403,7 +360,6 @@ button {
     color: #72c7ff;
     font-size: 12px;
     font-weight: bold;
-    overflow-wrap: anywhere;
 }
 
 .continue {
@@ -419,8 +375,7 @@ button {
 
 /* CAIXAS DE MISSÃO E PUZZLES */
 
-.mission-box,
-.puzzle-box {
+.mission-box, .puzzle-box {
     max-width: 680px;
     width: 100%;
     background: #152644;
@@ -450,27 +405,23 @@ button {
     object-fit: cover;
 }
 
-.mission-box h2,
-.puzzle-box h2 {
+.mission-box h2, .puzzle-box h2 {
     color: #53baff;
     margin-bottom: 15px;
 }
 
-.mission-box p,
-.puzzle-box p {
+.mission-box p, .puzzle-box p {
     color: #d3e2f8;
     line-height: 1.7;
     font-size: 14px;
 }
 
 .phase-img {
-    display: block;
     width: 100%;
-    height: auto;
-    max-height: 240px;
-    object-fit: contain;
+    height: 180px;
+    object-fit: cover;
     border-radius: 10px;
-    margin: 0 auto 15px;
+    margin-bottom: 15px;
     border: 1px solid #3c8dcb;
 }
 
@@ -485,7 +436,7 @@ button {
     font-size: 14px;
     line-height: 1.6;
     text-align: left;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
     min-height: 70px;
 }
 
@@ -547,8 +498,7 @@ button {
 .map-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    height: auto;
+    height: 280px;
     border-radius: 12px;
     overflow: hidden;
     border: 2px solid #3c8dcb;
@@ -557,10 +507,9 @@ button {
 }
 
 .map-container img {
-    display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     opacity: 0.85;
 }
 
@@ -582,15 +531,8 @@ button {
 }
 
 @keyframes pulsePin {
-    from {
-        transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 10px #ff3333;
-    }
-
-    to {
-        transform: translate(-50%, -50%) scale(1.15);
-        box-shadow: 0 0 25px #ff3333;
-    }
+    from { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 10px #ff3333; }
+    to { transform: translate(-50%, -50%) scale(1.15); box-shadow: 0 0 25px #ff3333; }
 }
 
 .back {
@@ -613,42 +555,89 @@ button {
     z-index: 15;
 }
 
-/* =====================================================
-   CORREÇÕES PARA CELULARES E TABLETS
-   ===================================================== */
+/* =========================================================
+   AJUSTE RESPONSIVO SEGURO
+   ========================================================= */
 
-@media screen and (max-width: 768px) {
+html,
+body {
+    min-height: 100%;
+}
 
-    .screen {
-        min-height: 100vh;
-        min-height: 100svh;
-        height: auto;
+body {
+    overflow-x: hidden;
+}
+
+.game {
+    min-height: 100vh;
+    min-height: 100svh;
+    height: auto;
+    overflow-x: clip;
+    overflow-y: visible;
+}
+
+.screen {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    height: auto;
+    padding-bottom: 40px;
+}
+
+#story,
+#characters {
+    justify-content: safe center;
+}
+
+.story-box,
+.story-content,
+.character-list,
+.character {
+    min-width: 0;
+}
+
+.story-content {
+    flex: 1 1 auto;
+    overflow-wrap: anywhere;
+}
+
+.story-box h2,
+.story-box p,
+.character h3,
+.character p,
+.subject,
+.select-label {
+    overflow-wrap: anywhere;
+}
+
+/* TABLETS E CELULARES */
+
+@media screen and (max-width: 800px) {
+
+    .screen:not(#home) {
         justify-content: flex-start;
-        padding: 76px 16px 32px;
+        padding: 76px 16px 36px;
     }
 
     /* HISTÓRIA DO DESAPARECIMENTO */
 
     #story {
-        justify-content: flex-start;
         align-items: center;
     }
 
     .story-box {
-        display: flex;
+        width: 100%;
+        max-width: 620px;
+        padding: 22px 18px;
         flex-direction: column;
         align-items: stretch;
         gap: 18px;
-        width: 100%;
-        max-width: 560px;
-        min-width: 0;
-        padding: 20px 16px;
-        margin: 0 auto;
     }
 
     .professor-avatar-large {
         width: min(100%, 190px);
-        height: 180px;
+        height: 190px;
         flex: 0 0 auto;
         margin: 0 auto;
     }
@@ -661,127 +650,79 @@ button {
 
     .story-content {
         width: 100%;
-        min-width: 0;
+        flex: 1 1 auto;
     }
 
     .story-box h2 {
-        font-size: 21px;
+        font-size: clamp(19px, 4vw, 22px);
         line-height: 1.3;
-        margin-bottom: 12px;
     }
 
     .story-box p {
         font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 12px;
+        line-height: 1.65;
     }
 
     .story-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
         width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     .story-buttons button {
-        width: 100%;
         max-width: 100%;
         white-space: normal;
-        overflow-wrap: anywhere;
     }
 
     /* PERSONAGENS */
 
     #characters {
-        justify-content: flex-start;
-        padding-top: 78px;
-        padding-bottom: 36px;
-    }
-
-    .heading {
-        width: 100%;
-        font-size: clamp(22px, 5.5vw, 29px);
-        line-height: 1.25;
-        overflow-wrap: anywhere;
-    }
-
-    .instructions {
-        width: 100%;
-        line-height: 1.5;
-        margin-bottom: 18px;
+        align-items: center;
     }
 
     .character-list {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
         width: 100%;
-        max-width: 430px;
-        gap: 14px;
-        margin: 0 auto;
+        max-width: 620px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
     }
 
     .character {
         width: 100%;
-        min-width: 0;
-        padding: 18px 14px;
+        padding: 18px 12px;
     }
 
     .character p {
         min-height: 0;
-        font-size: 13px;
     }
 
-    .character h3,
-    .character p,
-    .subject,
-    .select-label {
-        overflow-wrap: anywhere;
-    }
-
-    .avatar {
-        width: 120px;
-        height: 120px;
-    }
-
-    .avatar img {
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-
-    .continue {
-        max-width: 100%;
-        white-space: normal;
-        margin-top: 20px;
-    }
-
-    /* CAIXAS E MAPA */
+    /* MISSÕES E MAPA */
 
     .mission-box,
     .puzzle-box,
     .map-screen-box {
         width: 100%;
-        max-width: 100%;
-        padding: 20px 15px;
+        max-width: 680px;
+        padding: 22px 16px;
     }
 
     .radar-header {
         flex-wrap: wrap;
-        justify-content: center;
         gap: 8px;
     }
 
-    .map-container {
-        width: 100%;
+    .phase-img {
         height: auto;
-        aspect-ratio: 4 / 3;
+        max-height: 260px;
+        object-fit: contain;
     }
 
-    .phase-img {
-        width: 100%;
+    .map-container {
         height: auto;
-        max-height: 200px;
+        aspect-ratio: 16 / 9;
+    }
+
+    .map-container img {
         object-fit: contain;
     }
 
@@ -789,35 +730,22 @@ button {
 
     .footer {
         position: relative;
-        left: auto;
-        right: auto;
         bottom: auto;
-        margin-top: 18px;
+        margin-top: 16px;
         padding: 10px;
-        line-height: 1.5;
     }
 }
 
-/* CELULARES PEQUENOS */
+/* CELULARES ESTREITOS */
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 520px) {
 
-    .screen {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .logo {
-        font-size: 11px;
-        letter-spacing: 2px;
-    }
-
-    .title {
-        font-size: clamp(25px, 8vw, 38px);
+    .screen:not(#home) {
+        padding: 72px 12px 30px;
     }
 
     .story-box {
-        padding: 17px 13px;
+        padding: 18px 14px;
     }
 
     .story-box h2 {
@@ -828,22 +756,27 @@ button {
         font-size: 13px;
     }
 
+    .story-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .story-buttons button {
+        width: 100%;
+    }
+
     .character-list {
         grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
+        max-width: 420px;
     }
 
     .character {
-        padding: 16px 12px;
+        padding: 18px 14px;
     }
 
     .avatar {
-        width: 108px;
-        height: 108px;
-    }
-
-    .heading {
-        font-size: 22px;
+        width: 120px;
+        height: 120px;
     }
 
     .mission-box,
@@ -852,20 +785,33 @@ button {
         padding: 18px 12px;
     }
 
-    button,
-    .btn {
-        max-width: 100%;
-        white-space: normal;
-        overflow-wrap: anywhere;
+    .map-container {
+        aspect-ratio: 4 / 3;
     }
 
     .option-btn {
         width: 100%;
+        white-space: normal;
         overflow-wrap: anywhere;
     }
 
-    .footer {
-        font-size: 9px;
-        letter-spacing: 1px;
+    .play,
+    .continue,
+    .puzzle-btn,
+    .back {
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* COMPUTADORES COM JANELA DE POUCA ALTURA */
+
+@media screen and (min-width: 801px) and (max-height: 700px) {
+
+    .screen {
+        justify-content: flex-start;
+        padding-top: 30px;
+        padding-bottom: 40px;
     }
 }
